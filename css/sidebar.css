@@ -1,0 +1,83 @@
+#sidebar{
+    height: auto;
+    transition: all 300ms linear;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#profileuser{
+    text-align: center;
+    padding-bottom: 10px;
+}
+#profileuser img{
+    border: solid 2.5px;
+    border-color: #3ebe54;
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+}
+#username span{
+    text-align: center;
+    color: rgb(29, 28, 28);
+    box-sizing: border-box;
+}
+.sidebaritems{
+    height: fit-content;
+    min-height: 500px;
+}
+.sidebarlist{
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar.active{
+    left: 0;
+}
+.icon-sibar{
+    text-align: center;
+    width: 40%;
+    padding: 5px;
+    color: #1f1c1c;
+    font-size: 20px;
+}
+
+.nav-item-sidebar{
+    margin-bottom: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 0.5px;
+    border-top: solid 0.5px;
+    border-color: #284b34;
+}
+.nav-item-sidebar:hover{
+    transition: all 700ms;
+    width: 100%;
+    background-color: #3ebe53;
+}
+.nav-item-sidebar a:hover{
+    width: 100%;
+    color: #1a1717; 
+}
+
+.nav-link-sidebar{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 55.25px;
+    width: 100%;
+    text-decoration: none;
+    color: #3ebe54;
+    font-size: 15px;
+}
+.nav-link-sidebar:hover{
+    width: 100%;
+    cursor: pointer;
+    color: #ffffff;
+}
+.offcavas-config-perfil{
+    background: #212529;
+    color: #ffffff;
+}

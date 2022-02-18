@@ -1,0 +1,11 @@
+.footer {
+  height: fit-content;
+  width: auto;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+}
