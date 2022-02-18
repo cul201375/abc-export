@@ -17,5 +17,7 @@ if (!$_SESSION['idusuario']) {
     </div>
 
     <button class="btn btn-primary" onclick="ShowContent('modules/usuarios/listadoUsuarios.php')">VOLVER</button>
-    <button class="btn btn-success" onclick="AddNewRol();">AÑADIR ROL</button>
+    <button class="btn btn-success" id="addNewRol">AÑADIR ROL</button>
 </div>
+
+<script src="js/usersManager.js"></script>

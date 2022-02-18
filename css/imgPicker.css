@@ -1,0 +1,11 @@
+.infoimagen {
+    justify-content: flex-start;
+    display: inline-flex;
+    flex-wrap: nowrap;
+}
+.componentes {
+    background: #b0b4b1;
+    display: inline;
+    padding: 5px;
+  }
+  
