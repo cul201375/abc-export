@@ -10,8 +10,6 @@ $("#btnAddNewUser").on("click", function () {
   var form_data = new FormData();
   form_data.append('archivo', file_data);
 
-  console.log(nombre_usurio, email);
-
   if (
     nombre_usurio == "" ||
     prm_apellido == "" ||

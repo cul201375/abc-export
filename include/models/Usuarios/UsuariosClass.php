@@ -93,11 +93,10 @@ class UsuariosClass
     }
 
     #funcion para cargar el usuario en el modal de edición
-    public function loadUserToModal()
+    public function loadUserToModal($idusuario)
     {
 
-        $sqlGetUsers = "SELECT u.imagen, u.idusuario, r.nombre_rol, u.username, u.email, u.nombre_usuario, u.primer_apellido,
-            u.segundo_apellido, u.estado FROM usuario AS u, rol AS r WHERE r.idrol = u.fk_idrol; ";
+        $sqlGetUsers = "SELECT u.idusuario, u.fk_idrol, u.username, u.imagen, u.email, u.nombre_usuario, u.primer_apellido, u.segundo_apellido, r.nombre_rol, u.estado FROM usuario AS u, rol AS r WHERE u.idusuario = $idusuario AND u.fk_idrol = r.idrol;";
 
         $conexionClass = new ConnectionClass();
         $conexion = $conexionClass->conectar();

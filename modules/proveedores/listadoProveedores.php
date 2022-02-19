@@ -2,19 +2,16 @@
 ob_start();
 session_start();
 if (!$_SESSION['idusuario']) {
-  header('location: ../../index.php');
+    header('location: ../../index.php');
 }
 
 include_once('../../include/functions.php');
 
-$usuarios = new UsuariosClass();
+$proveedores = new ProveedorClass();
 
-$resultado = $usuarios->listadoUsuarios();
-$getRolesResult = $usuarios->getRolesFromUsers();
-
-
+$resultado = $proveedores->listaProveedores();
+$getCategory = $proveedores -> getCategory();
 ?>
-
 <!-- script para el imgPicker -->
 <script>
 document.getElementById('archivo').onchange = function(e) {
@@ -31,26 +28,30 @@ document.getElementById('archivo').onchange = function(e) {
     };
 }
 </script>
-<!-- datatable listado de usuarios -->
+
+<!-- datatable listado de proveedores -->
 <div class="container">
     <div style="padding: 10px;">
-        <button type="button" class="btn btn-primary m-1" onclick="ShowContent('modules/roles/addNewRol.php');">AGREGAR
+        <button type="button" class="btn btn-primary m-1"
+            onclick="ShowContent('modules/categorias/addNuevaCategoria.php');">AGREGAR NUEVA
+            CATEGORIA</button>
+        <button type="button" class="btn btn-secondary m-1" data-bs-target="#formNewProveedor"
+            data-bs-toggle="modal">AGREGAR
             NUEVO
-            ROL</button>
-        <button type="button" class="btn btn-secondary m-1" data-bs-target="#formNewUser" data-bs-toggle="modal">AGREGAR
-            NUEVO
-            USUARIO</button>
+            PROVEEDOR</button>
     </div>
 
     <table class="table" style="text-align: center;">
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">IMAGEN</th>
-                <th scope="col">USUARIO</th>
-                <th scope="col">ROL</th>
+                <th scope="col">PROVEEDOR</th>
+                <th scope="col">CATEGORIA</th>
+                <th scope="col">NIT</th>
                 <th scope="col">EMAIL</th>
-                <th scope="col">NOMBRE</th>
+                <th scope="col">IMAGEN</th>
+                <th scope="col">DIRECCION</th>
+                <th scope="col">TELEFONO</th>
                 <th scope="col">ESTADO</th>
                 <th scope="col">EDITAR</th>
                 <th scope="col">ELIMINAR</th>
@@ -58,114 +59,115 @@ document.getElementById('archivo').onchange = function(e) {
         </thead>
         <tbody>
             <?php
-    while ($fila = mysqli_fetch_array($resultado)) {
-    ?>
+        while ($fila = mysqli_fetch_array($resultado)) {
+        ?>
             <tr style="text-align: center; justify-content: center;">
-                <td><img src="<?php
-                      if ($fila['imagen'] == null) {
-                        echo 'img/usersprofile/nouser.png';
-                      } else {
-                        echo $fila['imagen'];
-                      } ?>" alt="userprofile" width="80" height="80">
-                </td>
-                <td><?php echo $fila['idusuario']; ?></td>
-                <td><?php echo $fila['username']; ?></td>
-                <td><?php echo $fila['nombre_rol']; ?></td>
+
+                <td><?php echo $fila['idproveedor']; ?></td>
+                <td><?php echo $fila['nombre_proveedor']; ?></td>
+                <td><?php echo $fila['nombre_categoria']; ?></td>
+                <td><?php echo $fila['nit_proveedor']; ?></td>
                 <td><?php echo $fila['email']; ?></td>
-                <td><?php echo $fila['nombre_usuario'] . " " . $fila['primer_apellido'] . " " . $fila['segundo_apellido']; ?>
-                </td>
+                <td><img src="<?php
+                                if ($fila['imagen'] == null) {
+                                    echo 'img/proveedores/noimg.jpg';
+                                } else {
+                                    echo $fila['imagen'];
+                                } ?>" alt="imagen del proveedor" width="80" height="80"></td>
+                <td><?php echo $fila['direccion']; ?></td>
+                <td><?php echo $fila['telefono']; ?></td>
                 <td><?php if (!$fila['estado']) {
-              echo 'INACTIVO';
-            } else {
-              echo 'ACTIVO';
-            } ?></td>
+                        echo 'INACTIVO';
+                    } else {
+                        echo 'ACTIVO';
+                    } ?></td>
                 <td><button type="button" class="btn btn-warning "
-                        onclick="UpdateUser(<?php echo $fila['idusuario']; ?>);" id="btnFormEditUser"
-                        name="btnFormEditUser"><i class="fas fa-edit"></i></button></td>
-                <td><button type="button" class="btn btn-danger " id="btnDeleteUser" name="btnDeleteUser"
-                        onclick="DeleteUser(<?php echo $fila['idusuario']; ?>);"><i
+                        onclick="UpdateProveedor(<?php echo $fila['idproveedor']; ?>);" id="btnEditProveedor"
+                        name="btnEditProveedor"><i class="fas fa-edit"></i></button></td>
+                <td><button type="button" class="btn btn-danger " id="btnEditProveedor" name="btnEditProveedor"
+                        onclick="DeleteProveedor(<?php echo $fila['idproveedor']; ?>);"><i
                             class="fas fa-user-minus"></i></button>
                 </td>
             </tr>
             <?php
-    }
-    ?>
+        }
+        ?>
         </tbody>
     </table>
 </div>
 
 
-
-<!-- Modal para agregar nuevo usuario -->
-<div class="modal fade" id="formNewUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- Modal para agregar nuevo proveedor -->
+<div class="modal fade" id="formNewProveedor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
-                <h5 class="modal-title" id="formNewUserLabel">Nuevo Usuario</h5>
+                <h5 class="modal-title" id="formNewProveedorLabel">Nuevo proveedor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="add_nombre_usuario" placeholder="Aqui va tu nombre">
-                    <label for="add_nombre_usuario">Nombre</label>
-                </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="add_primer_apellido" placeholder="Aqui va tu nombre">
-                    <label for="add_primer_apellido">Primer apellido</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="add_segundo_apellido" placeholder="Aqui va tu nombre">
-                    <label for="add_segundo_apellido">Segundo apellido</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="add_username" placeholder="Aqui va tu usuario">
-                    <label for="add_username">Usuario</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="add_password" placeholder="Aqui va tu contraseña">
-                    <label for="add_password">Contraseña</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="add_email" placeholder="Aqui va tu email">
-                    <label for="add_email">Correo electrónico</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="add_role_id" aria-label="Default select example">
-                        <option selected>Selecceiona un rol</option>
+                    <select class="form-select" id="add_categoria" aria-label="Default select example">
+                        <option selected>Selecceiona una categoría</option>
                         <?php
-            while ($row = mysqli_fetch_array($getRolesResult)) {
-            ?>
-                        <option value="<?php echo $row['idrol']; ?>"> <?php echo $row['nombre_rol']; ?></option>
+                        while ($row = mysqli_fetch_array($getCategory)) {
+                        ?>
+                        <option value="<?php echo $row['idcategoria']; ?>"> <?php echo $row['nombre_categoria']; ?>
+                        </option>
                         <?php
-            }
-            ?>
+                        }
+                        ?>
                     </select>
-                    <label for="add_role_id">Selecceiona un rol</label>
+                    <label for="add_categoria_id">Selecceiona una categoría</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="add_nombre_proveedor"
+                        placeholder="Aqui va el nombre del proveedor">
+                    <label for="add_nombre_proveedor">Nombre del proveedor</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="add_nit" placeholder="Aqui el nit del proveedor">
+                    <label for="add_nit">NIT</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="add_email"
+                        placeholder="Aqui va el email del proveedor">
+                    <label for="add_email">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="add_direccion"
+                        placeholder="Aqui va la direccion del proveedor">
+                    <label for="add_direccion">Dirección</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="add_telefono"
+                        placeholder="Aqui va el telefono del proveedor">
+                    <label for="add_telefono">Teléfon</label>
                 </div>
             </div>
 
-            <div class="infoimagen">
+            <div class="componentes">
                 <div class="componentes">
                     <input type="file" name="archivo" id="archivo" style="width: fit-content;">
                 </div>
                 <div class="componentes">
-                    <img src="img/userprofile/nouser.png" class="img-fluid"
+                    <img src="img/proveedores/noimg.jpg" class="img-fluid"
                         style="border: 1px solid; border-color: #288b41" alt="preview de imagen de producto" width="200"
                         height="200" id="preview">
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="btnAddNewUser">Agregar Usuario</button>
+                <button type="button" class="btn btn-success" id="addNuevoProveedor"
+                    onclick="AddProveedor();">Agregar</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
             </div>
 
@@ -174,7 +176,7 @@ document.getElementById('archivo').onchange = function(e) {
 </div>
 
 
-<!-- Modal para editar un usuario -->
+<!-- Modal para editar un proveedor -->
 </div>
 <div class="modal fade" id="formEditUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -226,12 +228,12 @@ document.getElementById('archivo').onchange = function(e) {
                     <select class="form-select" id="edit_role_id" aria-label="Default select example">
                         <option selected>Selecceiona un rol</option>
                         <?php
-            while ($row = mysqli_fetch_array($getRolesResult)) {
-            ?>
+                        while ($row = mysqli_fetch_array($getRolesResult)) {
+                        ?>
                         <option value="<?php echo $row['idrol']; ?>"> <?php echo $row['nombre_rol']; ?></option>
                         <?php
-            }
-            ?>
+                        }
+                        ?>
                     </select>
                     <label for="edit_role_id">Selecceiona un rol</label>
                 </div>
@@ -246,4 +248,4 @@ document.getElementById('archivo').onchange = function(e) {
     </div>
 </div>
 
-<script src="js/usersManager.js"></script>
+<script src="js/proveedorManager.js"></script>

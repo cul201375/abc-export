@@ -1,0 +1,21 @@
+html, body{
+    height: 100%;
+}
+#screenContent{
+    max-height: 100%;
+}
+
+.contenedortotal{
+    height: 100%;
+}
+.row{
+    height: 100%;
+}
+#mainContent{
+    height: 98.9%;
+    overflow: auto;
+    margin-top: 10px;
+}
+.container{
+    max-height: 100%;
+}

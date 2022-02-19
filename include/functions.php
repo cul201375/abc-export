@@ -14,5 +14,5 @@
     #require_once("models/Articulos/ArticulosClass.php");
     #require_once("models/Ingresos/IngresosClass.php");
     #require_once("models/Egresos/EgresosClass.php");
-    #require_once("models/Proveedores/ProveedoresClass.php");
+    require_once("models/Proveedores/ProveedoresClass.php");
 ?>
