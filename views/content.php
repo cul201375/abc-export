@@ -14,7 +14,7 @@
             </div>
             <ul class="sidebarlist">
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" aria-current="page" href="#" id="ListadoUsuarios"
+                    <a class="nav-link-sidebar" aria-current="page" href="#"
                         onclick="ShowContent('modules/usuarios/listadoUsuarios.php');">
                         <span class="icon-sibar material-icons-outlined">
                             people
@@ -22,29 +22,26 @@
                     </a>
                 </li>
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" href="#" id="Ventas"
-                        onclick="ShowContent('modules/egresos/listadoEgresos.php');">
+                    <a class="nav-link-sidebar" href="#" onclick="ShowContent('modules/egresos/listadoDeEgresos.php');">
                         <span class="icon-sibar material-icons-outlined">
                             file_upload
                         </span>Salidas</a>
                 </li>
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" href="#" id="RealizarIngreso"
-                        onclick="ShowContent('modules/ingresos/realizarIngreso.php');">
+                    <a class="nav-link-sidebar" href="#" onclick="ShowContent('modules/ingresos/detallesIngreso.php');">
                         <span class="icon-sibar material-icons-outlined">
                             file_download
                         </span>Entradas</a>
                 </li>
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" href="#" id="DetalleIngreso"
-                        onclick="ShowContent('modules/ingresos/listadoDetalleIngreso.php');">
+                    <a class="nav-link-sidebar" href="#" onclick="ShowContent('modules/egresos/detallesSalida.php');">
                         <span class="material-icons-outlined icon-sibar">
                             receipt
                         </span>Detalles de salidas</a>
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" onclick="ShowContent('modules/articulos/listadoArticulos.php');"
-                        href="#" id="ListadoProductos">
+                        href="#">
                         <span class="material-icons-outlined icon-sibar">
                             inventory_2
                         </span>Articulos</a>

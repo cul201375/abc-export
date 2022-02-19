@@ -2,7 +2,7 @@
 include_once(RAIZ_APLICACION . "/functions.php");
 class ArticuloClass
 {
-    #funcion para listar los usuarios
+    #funcion para listar los articulos
 
     public function listaArticulos()
     {
@@ -52,7 +52,7 @@ class ArticuloClass
             }
         }
     }
-    #funcion para añadir un nuevo usuario
+    #funcion para añadir un nuevo articulo
     public function addNewArticulo($fk_idcategoria, $fk_idproveedor, $nombre_articulo, $imagen, $costo_articulo, $precio_venta, $presentacion, $sku, $volumen, $unidades)
     {
         $sqlAddArticulo = "INSERT INTO articulo (fk_idcategoria, fk_idproveedor, nombre_articulo, imagen, costo_articulo, precio_venta, presentacion, sku, volumen, unidades, estado)
@@ -64,72 +64,24 @@ class ArticuloClass
         $result = mysqli_query($conexion, $sqlAddArticulo);
 
         if ($result) {
-            return 1;
-            $conexionClass->desconectar($conexion);
+            $ingreso = new IngresosClass();
+
+            $fk_idarticulo = mysqli_insert_id($conexion);
+            $idusuario = $_SESSION['idusuario'];
+            $fk_idingreso = $ingreso -> addIngreso($fk_idarticulo, $idusuario , $fk_idproveedor, $volumen);
+
+            if($fk_idingreso){
+                $hoy = getdate(); 
+                $fecha = $hoy['year']."-".$hoy['mon']."-".$hoy['mday']." ".$hoy['hours'].":".$hoy['minutes'].":".$hoy['seconds'];
+                $slqInserDetalleIngreso = "INSERT into detalle_ingreso (fk_idingreso, fk_idarticulo, fk_idusuario, fecha_ingreso) values ($fk_idingreso, $fk_idarticulo, $idusuario, '$fecha');";
+                $result = mysqli_query($conexion, $slqInserDetalleIngreso);
+                
+                $conexionClass->desconectar($conexion);
+                return 1;
+            }
         } else {
             return 0;
             $conexionClass->desconectar($conexion);
         }
     }
-
-    #funcion para cargar el proveedor en el modal de edición
-    public function loadProveedorToModal($idproveedor)
-    {
-
-        $sqlGetUsers = "SELECT * FROM proveedor WHERE u.idproveedor = $idproveedor;";
-
-        $conexionClass = new ConnectionClass();
-        $conexion = $conexionClass->conectar();
-
-        $result = mysqli_query($conexion, $sqlGetUsers);
-
-        if ($result) {
-            return $result;
-            $conexionClass->desconectar($conexion);
-        } else {
-            $result['resultado'] = 0;
-            return $result;
-            $conexionClass->desconectar($conexion);
-        }
-    }
-
-    #funcion para actualizar el proveedor
-    public function UpdateProveedor( $idproveedor, $fk_idcategoria, $nombre_proveedor, $nit_proveedor, $email, $imagen, $direccion, $telefono, $estado)
-    {
-        $sqlUpdateUser = "UPDATE proveedor SET fk_idcategoria = $fk_idcategoria, nombre_proveedor = $nombre_proveedor, nit_proveedor = $nit_proveedor, email = $email, imagen = $imagen, direccion = $direccion, telefono = $telefono, estado = $estado WHERE idprooveedor = $idproveedor;";
-
-        $conexionClass = new ConnectionClass();
-        $conexion = $conexionClass->conectar();
-
-        $result = mysqli_query($conexion, $sqlUpdateUser);
-
-        if ($result) {
-            return 1;
-            $conexionClass->desconectar($conexion);
-        } else {
-            return 0;
-            $conexionClass->desconectar($conexion);
-        }
-    }
-
-    #funcion para eliminar un proveedor
-    function deleteProveedor($idproveedor){
-        $conexionClass = new ConnectionClass();
-        $conexion = $conexionClass -> conectar();
-
-        $sql = "DELETE FROM proveedor WHERE idproveedor = $idproveedor";
-
-        $resultado = mysqli_query($conexion, $sql);
-
-        if($resultado){
-            $conexionClass -> desconectar($conexion);
-            return 1;
-        }
-        else{
-            $conexionClass -> desconectar($conexion);
-            return 0;
-        }
-       
-    }
-
 }

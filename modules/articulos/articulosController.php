@@ -32,7 +32,7 @@ if($addNewArticulo == 1){
         $imagen = $imagen_articulo;
     }
     
-    $result = $articulo->addNewArticulo($fk_idcategori, $fk_idproveedor, $nombre_articulo, $imagen, $costo_articulo, $precio_venta, $presentacion, $sku, $volumen, $unidades);
+    $result = $articulo-> addNewArticulo ($fk_idcategori, $fk_idproveedor, $nombre_articulo, $imagen, $costo_articulo, $precio_venta, $presentacion, $sku, $volumen, $unidades);
 
     $newdata['resultado'] = $result;
 

@@ -95,7 +95,7 @@ class ProveedorClass
         }
     }
 
-    #funcion para añadir un nuevo usuario
+    #funcion para añadir un nuevo proveedor
     public function addNewProveedor($idcategoria, $nombre_proveedor, $nit_proveedor, $email, $imagen, $direccion, $telefono)
     {
         $sqlAddNewUser = "INSERT INTO proveedor (fk_idcategoria, nombre_proveedor, nit_proveedor, email, imagen, direccion, telefono, estado) 
