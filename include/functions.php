@@ -12,7 +12,7 @@
     require_once("models/Auth/loginClass.php");
     require_once("models/Usuarios/UsuariosClass.php");
     require_once("models/Articulos/ArticulosClass.php");
-    #require_once("models/Ingresos/IngresosClass.php");
+    require_once("models/Ingreso/IngresosClass.php");
     #require_once("models/Egresos/EgresosClass.php");
     require_once("models/Proveedores/ProveedoresClass.php");
 ?>
