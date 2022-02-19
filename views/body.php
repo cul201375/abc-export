@@ -68,7 +68,7 @@
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" href="#" data-bs-dismiss="offcanvas" aria-label="Close"
-                        onclick="ShowContent('modules/ingresos/detalleIngresos.php');">
+                        onclick="ShowContent('modules/ingresos/detallesIngreso.php');">
                         <span class="icon-sibar material-icons-outlined">
                             file_download
                         </span>Entradas</a>

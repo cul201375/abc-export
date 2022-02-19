@@ -31,7 +31,6 @@ if($addNewProveedor == 1){+
     $direccion = (isset($_POST['direccion'])) ? $_POST['direccion'] : "0";
     $telefono = (isset($_POST['telefono'])) ? $_POST['telefono'] : "0";
 
-
     if ($imagen_proveedor == "0") {
         $imagen = "noimg.jpg";
     } 

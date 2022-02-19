@@ -79,7 +79,7 @@ document.getElementById('archivo').onchange = function(e) {
 
 <div class="modal-footer">
     <button type="button" class="btn btn-success" id="addNuevoProveedor" onclick="AddProveedor();">Agregar</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-danger" onclick="ShowContent('modules/proveedores/listadoProveedores.php')">Cancelar</button>
 </div>
 
 </div>
