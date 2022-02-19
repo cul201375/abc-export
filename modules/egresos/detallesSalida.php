@@ -13,6 +13,7 @@ $resultado = $detalleIngreso->listaIngresos();
 ?>
 
 <!-- datatable por agregar -->
-<div class="container">
-
+<div class="container" style="margin-top: 120px;">
+    <h1 style="color: #5813cc;">LO SENTIMOS ESTE MODÚLO ESTA EN MANTENIMIENTO</h1>
+    <img src="https://fixu.cl/wp-content/uploads/2020/02/mantenimiento-web-1024x630.png" alt="en mantenimient" class="img-fluid">
 </div>

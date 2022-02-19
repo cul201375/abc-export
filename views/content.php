@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" href="#" onclick="ShowContent('modules/egresos/listadoDeEgresos.php');">
+                    <a class="nav-link-sidebar" href="#" onclick="ShowContent('modules/egresos/listadeSalidas.php');">
                         <span class="icon-sibar material-icons-outlined">
                             file_upload
                         </span>Salidas</a>
@@ -59,9 +59,7 @@
             <div id="mainContent">
                 <div
                     style="height:700px; width: 100%; text-align: center; flex-direction: column; display: flex; justify-content: center; align-items: center; min-width: 400px;overflow-x: auto;">
-                    <img src="https://export.com.gt/attach/cbm/empresas/2225.jpg" alt="brand" width="300" height="300">
-                    <a href="http://localhost/soporte/informacion/sobre-nosotros.php" target="_blank"
-                        rel="noopener noreferrer" style="color: red;">Contáctanos</a>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUsz8YHDdl08573WS8-d4o7XaUcYiy5b5_qQ&usqp=CAU" alt="brand" width="300" height="300">
                 </div>
             </div>
         </main>

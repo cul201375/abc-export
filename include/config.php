@@ -3,7 +3,7 @@
     define("SERVER","127.0.0.1");
     define("USER", "root");
     define("PASS", "");
-    define("DB","abcexport");
+    define("DB","dbabcexport");
     define("SERVERFTP","127.0.0.1");
 
 
