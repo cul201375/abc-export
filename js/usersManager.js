@@ -87,6 +87,11 @@ $("#addNewRol").on("click", function () {
   var nombre_rol = $("#nombre_rol").val();
   var descripcion = $("#descripcion").val();
 
+  if(nombre_rol == "" || descripcion == ""){
+    swal("ERROR", "Todos los campos son requeridos!", "error");
+    return false;
+  }
+
   $.ajax({
     type: "POST",
     data: "addNewRol=1&nombre_rol=" + nombre_rol + "&descripcion=" + descripcion,

@@ -7,85 +7,88 @@ if (!$_SESSION['idusuario']) {
 
 include_once('../../include/functions.php');
 
-$usuarios = new UsuariosClass();
+$articulo = new ArticuloClass();
 
-$resultado = $usuarios->listadoUsuarios();
-$getRolesResult = $usuarios->getRolesFromUsers();
+$resultado = $articulo->listaArticulos();
+$getCategory = $articulo->getCategory();
 
 
 ?>
 
-<!-- script para el imgPicker -->
-<script>
-document.getElementById('archivo').onchange = function(e) {
-    // Creamos el objeto de la clase FileReader
-    let reader = new FileReader();
+<!-- datatable listado de articulos -->
+<div class="container">
+    <div style="padding: 10px;">
+        <button type="button" class="btn btn-primary m-1"
+            onclick="ShowContent('modules/categorias/addNuevaCategoria.php');">AGREGAR
+            NUEVA CATEGORIA</button>
+        <button type="button" class="btn btn-secondary m-1"
+            onclick="ShowContent('modules/articulos/addArticulo.php');">AGREGAR
+            NUEVO ARTICULO</button>
+        <button type="button" class="btn btn-warning m-1"
+            onclick="ShowContent('modules/proveedores/addNewProveedor.php');">AGREGAR
+            NUEVA CATEGORIA</button>
+    </div>
 
-    // Leemos el archivo subido y se lo pasamos a nuestro fileReader
-    reader.readAsDataURL(e.target.files[0]);
+    <table class="table table-responsive" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">IMAGEN</th>
+                <th scope="col">ARTICULO</th>
+                <th scope="col">COSTO</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col">PRESENTACION</th>
+                <th scope="col">SKU</th>
+                <th scope="col">VOLUMEN</th>
+                <th scope="col">UNIDADES</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">EDITAR</th>
+                <th scope="col">ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+        while ($fila = mysqli_fetch_array($resultado)) {
+        ?>
+            <tr style="text-align: center; justify-content: center;">
 
-    // Le decimos que cuando este listo ejecute el código interno
-    reader.onload = function() {
-        let image = document.getElementById('preview');
-        image.src = reader.result;
-    };
-}
-</script>
-<!-- datatable listado de usuarios -->
-<div style="padding: 10px;">
-    <button type="button" class="btn btn-primary m-1" onclick="ShowContent('modules/roles/addNewRol.php');">AGREGAR NUEVO
-        ROL</button>
-    <button type="button" class="btn btn-secondary m-1" data-bs-target="#formNewUser" data-bs-toggle="modal">AGREGAR NUEVO
-        USUARIO</button>
+                <td><?php echo $fila['idarticulo']; ?></td>
+                <td><img src="<?php
+                                if ($fila['imagen'] == null) {
+                                    echo 'img/product/noimg.jpg';
+                                } else {
+                                    echo $fila['imagen'];
+                                } ?>" alt="imagen del proveedor" width="80" height="80"></td>
+                <td><?php echo $fila['nombre_articulo']; ?></td>
+                <td><?php echo $fila['costo_articulo']; ?></td>
+                <td><?php echo $fila['precio_venta']; ?></td>
+                <td><?php echo $fila['presentacion']; ?></td>
+                <td><?php echo $fila['sku']; ?></td>
+                <td><?php echo $fila['volumen']; ?></td>
+                <td><?php echo $fila['unidades']; ?></td>
+                <td><?php if (!$fila['estado']) {
+                        echo 'INACTIVO';
+                    } else {
+                        echo 'ACTIVO';
+                    } ?></td>
+                <td>
+                    <button type="button" class="btn btn-warning "
+                        onclick="UpdateArticulo(<?php echo $fila['idarticulo']; ?>);" id="btnEditArticulo"
+                        name="btnEditArticulo"><span class="material-icons-outlined">edit</span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger " id="btnDeleteArticulo" name="btnDeleteArticulo"
+                        onclick="DeleteArticulo(<?php echo $fila['idarticulo']; ?>);"><span
+                            class="material-icons-outlined">delete</span>
+                    </button>
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
-
-<table class="table" style="text-align: center;">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">IMAGEN</th>
-            <th scope="col">USUARIO</th>
-            <th scope="col">ROL</th>
-            <th scope="col">EMAIL</th>
-            <th scope="col">NOMBRE</th>
-            <th scope="col">ESTADO</th>
-            <th scope="col">EDITAR</th>
-            <th scope="col">ELIMINAR</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-    while ($fila = mysqli_fetch_array($resultado)) {
-    ?>
-        <tr style="text-align: center; justify-content: center;">
-            <td><img src="<?php
-                      if ($fila['imagen'] == null) {
-                        echo 'img/usersprofile/nouser.png';
-                      } else {
-                        echo $fila['imagen'];
-                      } ?>" alt="userprofile" width="80" height="80">
-            </td>
-            <td><?php echo $fila['idusuario']; ?></td>
-            <td><?php echo $fila['username']; ?></td>
-            <td><?php echo $fila['nombre_rol']; ?></td>
-            <td><?php echo $fila['email']; ?></td>
-            <td><?php echo $fila['nombre_usuario'] . " " . $fila['primer_apellido'] . " " . $fila['segundo_apellido']; ?>
-            </td>
-            <td><?php if (!$fila['estado']) {
-              echo 'INACTIVO';
-            } else {
-              echo 'ACTIVO';
-            } ?></td>
-            <td><button type="button" class="btn btn-warning " onclick="UpdateUser(<?php echo $fila['idusuario']; ?>);"
-                    id="btnFormEditUser" name="btnFormEditUser"><i class="fas fa-edit"></i></button></td>
-            <td><button type="button" class="btn btn-danger " id="btnDeleteUser" name="btnDeleteUser"
-                    onclick="DeleteUser(<?php echo $fila['idusuario']; ?>);"><i class="fas fa-user-minus"></i></button>
-            </td>
-        </tr>
-        <?php
-    }
-    ?>
-    </tbody>
-</table>
 
 <script src="js/usersManager.js"></script>

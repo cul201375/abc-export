@@ -3,6 +3,16 @@ $("#addNewCategory").on("click", function () {
   var nombre_categoria = $("#nombre_categoria").val();
   var descripcion_cat = $("#descripcion_categoria").val();
 
+  
+  if (
+    nombre_categoria == "" ||
+    descripcion_cat == "" 
+  ) {
+    swal("ERROR", "TODOS LOS CAMPOS SON OBLIGATORIOS", "error");
+    return false;
+  }
+
+
   $.ajax({
     type: "POST",
     data: "addNewCategory=1&nombre_categoria=" + nombre_categoria + "&descripcion=" + descripcion_cat,

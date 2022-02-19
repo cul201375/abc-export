@@ -42,7 +42,7 @@ document.getElementById('archivo').onchange = function(e) {
             USUARIO</button>
     </div>
 
-    <table class="table" style="text-align: center;">
+    <table class="table table-responsive" style="text-align: center;">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -81,10 +81,12 @@ document.getElementById('archivo').onchange = function(e) {
             } ?></td>
                 <td><button type="button" class="btn btn-warning "
                         onclick="UpdateUser(<?php echo $fila['idusuario']; ?>);" id="btnFormEditUser"
-                        name="btnFormEditUser"><i class="fas fa-edit"></i></button></td>
+                        name="btnFormEditUser"><span class="material-icons-outlined">edit</span>
+                    </button>
+                </td>
                 <td><button type="button" class="btn btn-danger " id="btnDeleteUser" name="btnDeleteUser"
-                        onclick="DeleteUser(<?php echo $fila['idusuario']; ?>);"><i
-                            class="fas fa-user-minus"></i></button>
+                        onclick="DeleteUser(<?php echo $fila['idusuario']; ?>);"><span class="material-icons-outlined">delete</span>
+                    </button>
                 </td>
             </tr>
             <?php

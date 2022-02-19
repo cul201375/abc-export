@@ -54,38 +54,45 @@
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" aria-current="page" href="#" id="ListadoUsuarios"
                         onclick="ShowContent('modules/usuarios/listadoUsuarios.php');">
-                        <i class="fas fa-users icon-sibar"></i>Usuarios
+                        <span class="icon-sibar material-icons-outlined">
+                            people
+                        </span>Usuarios
                     </a>
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" href="#" id="Ventas"
-                        onclick="ShowContent('modules/ventas/ListadoVentas.php');">
-                        <i class="far fa-chart-bar icon-sibar"></i>Ventas</a>
-                </li>
-                <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" href="#" id="Clientes"
-                        onclick="ShowContent('modules/clientes/ListadoClientes.php');">
-                        <i class="far fa-address-book icon-sibar"></i>Clientes</a>
+                        onclick="ShowContent('modules/egresos/listadoEgresos.php');">
+                        <span class="icon-sibar material-icons-outlined">
+                            file_upload
+                        </span>Salidas</a>
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" href="#" id="RealizarIngreso"
                         onclick="ShowContent('modules/ingresos/realizarIngreso.php');">
-                        <i class="fas fa-cart-plus icon-sibar"></i>Ingreso de mercadería</a>
+                        <span class="icon-sibar material-icons-outlined">
+                            file_download
+                        </span>Entradas</a>
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" href="#" id="DetalleIngreso"
                         onclick="ShowContent('modules/ingresos/listadoDetalleIngreso.php');">
-                        <i class="fas fa-receipt  icon-sibar"></i>Detalles de ingresos</a>
+                        <span class="material-icons-outlined icon-sibar">
+                            receipt
+                        </span>Detalles de salidas</a>
                 </li>
                 <li class="nav-item-sidebar">
-                    <a class="nav-link-sidebar" onclick="ShowContent('modules/productos/listadoProductos.php');"
+                    <a class="nav-link-sidebar" onclick="ShowContent('modules/articulos/listadoArticulos.php');"
                         href="#" id="ListadoProductos">
-                        <i class="fas fa-layer-group icon-sibar"></i>Productos</a>
+                        <span class="material-icons-outlined icon-sibar">
+                            inventory_2
+                        </span>Articulos</a>
                 </li>
                 <li class="nav-item-sidebar">
                     <a class="nav-link-sidebar" onclick="ShowContent('modules/proveedores/listadoProveedores.php');"
                         href="#" id="ListadoProveedores">
-                        <i class="fas fa-people-carry icon-sibar"></i>Proveedores</a>
+                        <span class="icon-sibar material-icons-outlined">
+                            inventory
+                        </span>Proveedores</a>
                 </li>
             </ul>
         </div>

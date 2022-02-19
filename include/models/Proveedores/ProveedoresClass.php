@@ -29,6 +29,30 @@ class ProveedorClass
         }
     }
 
+    #funcion para obtener los ids de los proveedores
+
+    public function getProveedores()
+    {
+        $conexionClass = new ConnectionClass();
+        $conexion = $conexionClass->conectar();
+
+        if (!$conexion) {
+            die("Conexion fallida por: " . mysqli_connect_error());
+        } else {
+            $sqlGetRoles = "SELECT idproveedor, nombre_proveedor FROM proveedor;";
+
+            $result = mysqli_query($conexion, $sqlGetRoles);
+
+            if ($result) {
+                return $result;
+                $conexionClass->desconectar($conexion);
+            } else {
+                return $error["error"] = 0;
+                $conexionClass->desconectar($conexion);
+            }
+        }
+    }
+
     #funcion para obtener los categorias de los proveedores
 
     public function getCategory()
@@ -91,11 +115,11 @@ class ProveedorClass
         }
     }
 
-    #funcion para cargar el usuario en el modal de edición
-    public function loadUserToModal($idusuario)
+    #funcion para cargar el proveedor en el modal de edición
+    public function loadProveedorToModal($idproveedor)
     {
 
-        $sqlGetUsers = "SELECT u.idusuario, u.fk_idrol, u.username, u.imagen, u.email, u.nombre_usuario, u.primer_apellido, u.segundo_apellido, r.nombre_rol, u.estado FROM usuario AS u, rol AS r WHERE u.idusuario = $idusuario AND u.fk_idrol = r.idrol;";
+        $sqlGetUsers = "SELECT * FROM proveedor WHERE u.idproveedor = $idproveedor;";
 
         $conexionClass = new ConnectionClass();
         $conexion = $conexionClass->conectar();
@@ -112,18 +136,10 @@ class ProveedorClass
         }
     }
 
-    #funcion para actualizar el usuario
-    public function updateUser($idusuario, $idrol, $username, $imagen, $password, $email, $nombre_usr, $primer_apellido, $segundo_apellido, $estado)
+    #funcion para actualizar el proveedor
+    public function UpdateProveedor( $idproveedor, $fk_idcategoria, $nombre_proveedor, $nit_proveedor, $email, $imagen, $direccion, $telefono, $estado)
     {
-        $sqlUpdateUser = "UPDATE usuario SET fk_idrol = $idrol, 
-        username = $username, 
-        imagen = $imagen, 
-        password = $password, 
-        email = $email, 
-        nombre_usuario = $nombre_usr, 
-        primer_apellido = $primer_apellido, 
-        segundo_apellido = $segundo_apellido, 
-        estado = $estado WHERE idusuario = $idusuario;";
+        $sqlUpdateUser = "UPDATE proveedor SET fk_idcategoria = $fk_idcategoria, nombre_proveedor = $nombre_proveedor, nit_proveedor = $nit_proveedor, email = $email, imagen = $imagen, direccion = $direccion, telefono = $telefono, estado = $estado WHERE idprooveedor = $idproveedor;";
 
         $conexionClass = new ConnectionClass();
         $conexion = $conexionClass->conectar();
@@ -139,12 +155,12 @@ class ProveedorClass
         }
     }
 
-    #funcion para eliminar un usuario
-    function deleteUser($idusuario){
+    #funcion para eliminar un proveedor
+    function deleteProveedor($idproveedor){
         $conexionClass = new ConnectionClass();
         $conexion = $conexionClass -> conectar();
 
-        $sql = "DELETE FROM usuario WHERE idusuario = $idusuario";
+        $sql = "DELETE FROM proveedor WHERE idproveedor = $idproveedor";
 
         $resultado = mysqli_query($conexion, $sql);
 

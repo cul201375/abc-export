@@ -49,16 +49,16 @@
     justify-content: center;
     border-bottom: solid 0.5px;
     border-top: solid 0.5px;
-    border-color: #4946465b;
+    border-color: #3a3a3a;
 }
 .nav-item-sidebar:hover{
     transition: all 700ms;
     width: 100%;
-    background-color: #858585;
+    background-color: #3d3d3d69;
 }
 .nav-item-sidebar a:hover{
     width: 100%;
-    color: #f8f8f8; 
+    color: #949494; 
 }
 
 .nav-link-sidebar{
